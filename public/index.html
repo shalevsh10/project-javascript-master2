@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="toast.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto my-2 my-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#" id="nav-home-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="nav-aboutus-link">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="nav-contactus-link">Contact us</a>
+            </li>
+          </ul>
+          <form class="d-flex responsive-nav-flex" role="search" id="navBeforeLogin">
+            <a class="nav-link me-3" href="#" id="nav-register-link">Register</a>
+            <a class="nav-link responsive-mt" href="#" id="nav-login-link">Login</a>
+          </form>
+          <form class="d-flex responsive-nav-flex d-none" role="search" id="navAfterLogin">
+            <a class="nav-link me-3" href="#" id="nav-edit-profile-page">Name</a>
+            <a class="nav-link responsive-mt" href="#" id="nav-logout">Logout</a>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div id="toast"></div>
+    <main>
+      <!--home page-->
+      <div id="home-page" class="d-block">
+        <h1 style="
+              font-family: cursive;
+              font-size: 36px;
+              text-align: center;
+              color: aliceblue;
+              text-shadow: 2px 2px #000000;
+            ">
+          Luxury Cars for Sale
+        </h1>
+
+        <div class="popup-wrapper d-flex justify-content-center align-items-center d-none" id="editPropertiesPopup">
+          <div class="popup-div" id="editPropertiesPopupChild">
+            <div class="card">
+              <img src="" class="card-img-top" id="editPropertiesPopupImgDisplay" />
+              <div class="card-body">
+                <h5 class="card-title">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="editPropertiesPopupName" placeholder="Name" />
+                    <label for="editPropertiesPopupName">Name</label>
+                  </div>
+                </h5>
+                <div class="card-text">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="description"
+                      id="editPropertiesPopupDescription"></textarea>
+                    <label for="editPropertiesPopupDescription">Description</label>
+                  </div>
+                </div>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="editPropertiesPopupPrice" placeholder="Price" />
+                    <label for="editPropertiesPopupPrice">Price</label>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="editPropertiesPopupImg" placeholder="Img" />
+                    <label for="editPropertiesPopupImg">Img</label>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="card-body">
+                <button type="button" class="btn btn-success" id="editPropertiesPopupSaveBtn">
+                  <i class="bi bi-check-circle-fill"></i> Save
+                </button>
+                <button type="button" class="btn btn-danger" id="editPropertiesPopupCancelBtn">
+                  <i class="bi bi-x-circle-fill" id="editPropertiesPopupCancelBtnIcon"></i>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+                   
+        </div>
+        <div class="d-flex justify-content-between mb-4">
+          <div>
+            <button type="button" class="btn btn-info" id="homedisplayList">
+              <i class="bi bi-card-list"></i>
+            </button>
+            <button type="button
+                      " class="btn btn-info" id="homedisplayGallery">
+              <i class="bi bi-grid-3x3-gap-fill"></i>
+            </button>
+            <button type="button
+                      " class="btn btn-info" id="homedisplayCaruosle">
+              <i class="bi bi-aspect-ratio-fill"></i>
+            </button>
+            <button type="button" class="btn btn-info" id="ButtonUP">
+              <i class="bi bi-arrow-up-square-fill"></i>
+            </button>
+            <button type="button" class="btn btn-info" id="Buttondown">
+              <i class="bi bi-arrow-down-square-fill"></i>
+            </button>
+            <button type="button" class="btn btn-info" id="btnAddNewProperty">
+              <i class="bi bi-plus-square-fill"></i>
+            </button>
+          </div>
+          <form class="d-flex justify-content-end" role="search">
+            <input id="homePageSearchInput" class="form-control me-2" type="search" placeholder="Search"
+              aria-label="Search" id="homeDisplaySearch" />
+          </form>
+        </div>
+        <div class="row">
+          <div class="col">
+            <img src="assets/imgs/index.png" alt="Logo BMW" class="img-fluid rounded-circle logo" width="80"
+              height="80" />
+          </div>
+          <div class="col">
+            <img src="assets/imgs/porsche.png" alt="Logo PORSCHE" class="img-fluid rounded-circle logo" width="80"
+              height="80" />
+          </div>
+          <div class="col">
+            <img src="assets/imgs/ferari3.png" alt="Logo FERARI" class="img-fluid rounded-circle logo" width="80"
+              height="80" />
+          </div>
+          <div class="col">
+            <img src="assets/imgs/mercedes.jpeg" alt="Log MERCEDES" class="img-fluid rounded-circle logo" width="80"
+              height="80" />
+          </div>
+          <div class="col">
+            <img src="assets/imgs/alfa romeo.jpeg" alt="Logo ALFA ROMEO" class="img-fluid rounded-circle logo" width="80"
+              height="80" />
+          </div>
+          <div class="col">
+            <img src="assets/imgs/maserti2.jpeg" alt="Logo MASERATI" class="img-fluid rounded-circle logo" width="80"
+              height="80" />
+          </div>
+          <div class="col">
+            <img src="assets/imgs/bugatti 3.jpeg" alt="Logo BUGATTI" class="img-fluid rounded-circle logo" width="80"
+              height="80" />
+          </div>
+          <div class="col">
+            <img src="assets/imgs/audi3.png" alt="Logo AUDI" class="img-fluid rounded-circle logo" width="80"
+              height="80" />
+          </div>
+
+          <div class="col">
+            <img src="assets/imgs/bentley2.png" alt="Logo BENTLY" class="img-fluid rounded-circle logo" width="80"
+              height="80" />
+              
+          </div>
+        </div>
+        <br />
+        <br />
+
+        <div id="propertiesGallery" class="d-none">
+          <div class="row row-cols-1 row-cols-md-3 g-4" id="home-page-properties-gallery"></div>
+        </div>
+
+        <div id="propertiesList" class="d-none">
+          <ul class="list-group" id="home-page-properties-list"></ul>
+        </div>
+        <div id="propertiesCarusel">
+          <div class="img-container" id="home-page-properties-carousel"></div>
+          <div class="d-flex justify-content-around">
+            <button type="button" class="btn btn-primary" id="back-carusel-btn">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <button type="button" class="btn btn-primary" id="next-carusel-btn">
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="container my-5">
+          <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+              <h2 class="fw-bold mb-4">Beautifully Designed Title</h2>
+              <hr class="border-2 border-primary" />
+              <p class="lead mt-4"></p>
+              <p>
+                Welcome to our luxury car dealership, where we offer the
+                finest selection of premium vehicles from the world's leading
+                brands. With years of experience in the industry, we take
+                pride in providing our customers with the highest level of
+                professional and trustworthy service.
+              </p>
+
+              <p>
+                Our homepage showcases the latest new arrivals to our
+                inventory, including the newest models from top luxury car
+                brands. We also offer a wide range of used and certified
+                pre-owned vehicles that meet our strict standards for quality
+                and performance. Our inventory includes sedans, SUVs, sports
+                cars, and exotic vehicles, all of which are in excellent
+                condition and come with detailed service histories.
+              </p>
+              <p>
+                We understand that buying a luxury car is a significant
+                investment, which is why we offer a range of financing options
+                to fit your budget. Our finance team works with multiple
+                lenders to provide you with competitive rates and flexible
+                terms. We also offer a trade-in program for your current
+                vehicle, making it easier to upgrade to the luxury car of your
+                dreams.
+              </p>
+
+              <p>
+                At our dealership, we believe that exceptional customer
+                service is paramount. Our experienced sales staff is
+                knowledgeable about every vehicle in our inventory and can
+                help you find the perfect car that suits your needs and
+                preferences. We take the time to listen to your requirements,
+                and we offer personalized advice to ensure that you make an
+                informed decision.
+              </p>
+
+              <p>
+                Please browse our website to view our extensive inventory of
+                luxury cars, and feel free to contact us if you have any
+                questions or to schedule a test drive. Thank you for
+                considering us for your next luxury car purchase."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--about us-->
+      <div id="about-us" class="d-none">
+        <h1 style="
+              font-family: cursive;
+              font-size: 36px;
+              text-align: center;
+              color: aliceblue;
+              text-shadow: 2px 2px #000000;
+            ">
+          about us
+        </h1>
+        <div class="container my-5">
+          <div class="row">
+            <div class="col-lg-6">
+              <p>
+                For 25 years, we at BUY & DRIVE have been driven by the passion to give you the most affordable car
+                experience
+
+                In variety, quality, service and of course the price.
+
+                We come from a place of true love for the automotive world, every engine pulse excites us, every press
+                of the gas pedal
+                fills us with adrenaline.
+
+                This love is the basis of our relationship with each and every client, because you are our most
+                important asset.
+
+                The customers, or "the community", as we call them, are the basis of our success and growth. A large
+                part of our
+                customers are repeat customers and our best recommenders.
+                COME, BUY AND DRIVE
+
+                As you can understand from the name, you are invited to come, choose and drive home with the car of your
+                dreams, today.
+
+                The company has a main, modern and sophisticated sales and trade center located in the Polg industrial
+                area in Netanya.
+
+                Come and be impressed by hundreds of vehicles ready for sale, new from the nylons or first hand, and
+                choose the
+                transaction route that suits you best, including courteous service and full security.
+                All reasons lead to DRIVE&BUY
+              </p>
+
+            </div>
+            <div id="carousel-about-us" class="col-lg-6">
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="assets/imgs/inside1.jpg" class="d-block w-100" alt="BMW-X7">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/imgs/inside2.jpg" class="d-block w-100" alt="AUDI-TT">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/imgs/inside3.jpg" class="d-block w-100" alt="RANGE-ROVER">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container my-5">
+          <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+              <h2 class="fw-bold mb-4">Beautifully Designed Title</h2>
+              <hr class="border-2 border-primary" />
+              <p class="lead mt-4">
+
+                After over 25 years in the automotive industry, we know there are many places to buy a car. Here are
+                some reasons why we
+                believe our community members choose BUY&DRIVE
+
+                High-quality, skilled staff with an excellent sense of service
+                A spectacular showroom offering luxury vehicles at the highest level
+                Convenient, flexible and profitable financing routes, up to 100% financing - low monthly payment with no
+                down payment at
+                all
+                Immediate delivery - Bay & Drive has a wide inventory of vehicles, so we are sure that you will drive
+                home today with
+                the car of your dreams
+                Trade-in - Our trade-in department also provides on-site vehicle inspections and valuations by highly
+                skilled
+                professionals
+                Test drives, on the spot - we have a wide variety of vehicles so that you can immediately get an
+                impression of the
+                vehicle with an experiential test drive.
+
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="container my-5">
+          <div class="row">
+            <div class="col-lg-3 mb-4">
+              <div class="card text-center">
+                <img src="assets/imgs/7.jpg" alt="mercedes-bnz" class="card-img-top rounded-circle" />
+                <div class="card-body">
+                  <h5 class="card-title">John Smith</h5>
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed consequat mollis sapien eu suscipit.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 mb-3">
+              <div class="card text-center">
+                <img src="assets/imgs/yonatan3.jpg" alt="CEO of the company" class="card-img-top rounded-circle" />
+                <div class="card-body">
+                  <h5 class="card-title">Jane Doe</h5>
+                  <p class="card-text">
+                    Sed lacinia, orci eu blandit tincidunt, velit dolor
+                    vulputate risus, et tincidunt nisi dolor nec magna.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 mb-3">
+              <div class="card text-center">
+                <img src="assets/imgs/shalev2.jpg" alt="CEO of the company" class="card-img-top rounded-circle" />
+                <div class="card-body">
+                  <h5 class="card-title">Jane Doe</h5>
+                  <p class="card-text">
+                    Sed lacinia, orci eu blandit tincidunt, velit dolor
+                    vulputate risus, et tincidunt nisi dolor nec magna.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 mb-3">
+              <div class="card text-center">
+                <img src="assets/imgs/3.jpg" alt="mercedes-bnz-fz" class="card-img-top rounded-circle" />
+                <div class="card-body">
+                  <h5 class="card-title">Mark Johnson</h5>
+                  <p class="card-text">
+                    Pellentesque id diam vel nisl fringilla fringilla vitae
+                    vel nisi. Aliquam eget sem ac nulla commodo varius.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+                  
+      </div>
+
+      <!--contact us-->
+      <div id="contact-us" class="d-none">
+        <h1 style="
+              font-family: cursive;
+              font-size: 36px;
+              text-align: center;
+              color: aliceblue;
+              text-shadow: 2px 2px #000000;
+            ">
+          Contact Us
+        </h1>
+        <div class="container my-5">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+              <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label" style="color: white">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="Enter your name" />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label" style="color: white">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter your email" />
+                </div>
+                <div class="mb-3">
+                  <label for="subject" class="form-label" style="color: white">Subject</label>
+                  <input type="text" class="form-control" id="subject"
+                    placeholder="Enter the subject of your message" />
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label" style="color: white">Message</label>
+                  <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Send Message
+                </button>
+              </form>
+            </div>
+              
+          </div>
+        </div>
+      </div>
+      <!--registr page-->
+      <div id="register-page" class="d-none">
+        <h1 style="
+              font-family: cursive;
+              font-size: 36px;
+              text-align: center;
+              color: aliceblue;
+              text-shadow: 2px 2px #ffffff;
+            ">
+          Register Page
+        </h1>
+        <form class="row g-3" onsubmit="event.preventDefault()">
+
+          <div class="col-md-6">
+            <label for="register-input-name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="register-input-name" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-name">
+              Must Start With a capital Letter
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="register-input-last-name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="register-input-last-name" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-last-name">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <h4>Address</h4>
+          <div class="col-md-4">
+            <label for="register-input-state" class="form-label">State</label>
+            <input type="text" class="form-control" id="register-input-state" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-state">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="register-input-country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="register-input-country" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-country">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="register-input-city" class="form-label">City</label>
+            <input type="text" class="form-control" id="register-input-city" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-city">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="register-input-street" class="form-label">Street</label>
+            <input type="text" class="form-control" id="register-input-street" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-street">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="register-input-house-number" class="form-label">House Number</label>
+            <input type="number" class="form-control" id="register-input-house-number" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-house-number">
+              numbers are required
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="register-input-zip-code" class="form-label">Zip Code</label>
+            <input type="number" class="form-control" id="register-input-zip-code" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-zip-code">
+              numbers are required
+            </div>
+          </div>
+          <h4>Means Of Contact</h4>
+          <div class="col-md-6">
+            <label for="register-input-email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="register-input-email" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-email">
+              email inavalid
+              <br />
+              example of a valid email: "yon34@gmail.com"
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="register-input-phone" class="form-label">Phone</label>
+            <input type="number" class="form-control" id="register-input-phone" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-phone">
+              numbers are required
+            </div>
+          </div>
+          <h4>Security</h4>
+          <div class="col-md-6">
+            <label for="register-input-password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="register-input-password" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-password">
+              1. The password length must be greater than or equal to 8 <br />
+              2. The password must contain one or more uppercase
+              characters,<br />
+              3. lowercase characters,<br />
+              4. numeric values, (1-10)<br />
+              5. special characters (!@#$%^&*)
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="register-input-repeat-password" class="form-label">Repeat password</label>
+            <input type="password" class="form-control" id="register-input-repeat-password" />
+            <div class="alert alert-danger d-none" role="alert" id="register-alert-repeat-password">
+              Password does not match
+            </div>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary" disabled="true" id="register-btn">
+              Submit
+            </button>
+          </div>
+        </form>
+                  
+      </div>
+      <!--login page-->
+      <div id="login-page" class="d-none">
+        <h1 style="
+              font-family: cursive;
+              font-size: 36px;
+              text-align: center;
+              color: aliceblue;
+              text-shadow: 2px 2px #000000;
+            ">
+          Login Page
+        </h1>
+        <form onsubmit="event.preventDefault()">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="login-input-email" placeholder="name@example.com" />
+            <label for="login-input-email">Email address</label>
+          </div>
+          <div class="alert alert-danger d-none" role="alert" id="login-alert-email">
+            Email rules
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="login-input-password" placeholder="Password" />
+            <label for="login-input-password">Password</label>
+          </div>
+          <div class="alert alert-danger d-none" role="alert" id="login-alert-password">
+            Password rules
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          </div>
+          <button class="btn btn-primary" id="login-btn">Submit</button>
+        </form>
+          
+      </div>
+      <!--profile-page-->
+      <div id="profile-page" class="d-none">
+        <h1 style="
+              font-family: cursive;
+              font-size: 36px;
+              text-align: center;
+              color: aliceblue;
+              text-shadow: 2px 2px #000000;
+            ">
+          prifile page
+        </h1>
+        <form class="row g-3" onsubmit="event.preventDefault()">
+          <h4>name</h4>
+          <div class="col-md-6">
+            <label for="profile-input-name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="profile-input-name" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-name">
+              Must Start With a capital Letter
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="profile-input-last-name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="profile-input-last-name" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-last-name">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <h4>Address</h4>
+          <div class="col-md-4">
+            <label for="profile-input-state" class="form-label">State</label>
+            <input type="text" class="form-control" id="profile-input-state" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-state">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="profile-input-country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="profile-input-country" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-country">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="profile-input-city" class="form-label">City</label>
+            <input type="text" class="form-control" id="profile-input-city" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-city">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="profile-input-street" class="form-label">Street</label>
+            <input type="text" class="form-control" id="profile-input-street" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-street">
+              Must Start With a capital Letter
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="profile-input-house-number" class="form-label">House Number</label>
+            <input type="number" class="form-control" id="profile-input-house-number" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-house-number">
+              numbers are required
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="profile-input-zip-code" class="form-label">Zip Code</label>
+            <input type="number" class="form-control" id="profile-input-zip-code" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-zip-code">
+              numbers are required
+            </div>
+          </div>
+          <h4>Means Of Contact</h4>
+          <div class="col-md-6">
+            <label for="profile-input-email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="profile-input-email" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-email">
+              email inavalid
+              <br />
+              example of a valid email: "yon34@gmail.com"
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="profile-input-phone" class="form-label">Phone</label>
+            <input type="number" class="form-control" id="profile-input-phone" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-phone">
+              numbers are required
+            </div>
+          </div>
+          <h4>Security</h4>
+          <div class="col-md-6">
+            <label for="profile-input-password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="profile-input-password" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-password">
+              1. The password length must be greater than or equal to 8 <br />
+              2. The password must contain one or more uppercase
+              characters,<br />
+              3. lowercase characters,<br />
+              4. numeric values, (1-10)<br />
+              5. special characters (!@#$%^&*)
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="profile-input-repeat-password" class="form-label">Repeat password</label>
+            <input type="password" class="form-control" id="profile-input-repeat-password" />
+            <div class="alert alert-danger d-none" role="alert" id="profile-alert-repeat-password">
+              Password does not match
+            </div>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary" id="profile-btn">
+              Update
+            </button>
+          </div>
+        </form>
+                  
+      </div>
+    </main>
+    <div id="page-not-found-page" class="d-none"> </div>
+    <footer class="bg-body-secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5 class="text-uppercase mb-4">Contact Us</h5>
+            <p>123 Main Street</p>
+            <p>Anytown, USA 12345</p>
+            <p>(123) 456-7890</p>
+          </div>
+          <div class="col-md-4">
+            <h5 class="text-uppercase mb-4">Social Media</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#"><i class="bi bi-facebook"></i> Facebook</a>
+              </li>
+              <li>
+                <a href="#"><i class="bi bi-twitter"></i> Twitter</a>
+              </li>
+              <li>
+                <a href="#"><i class="bi bi-instagram"></i> Instagram</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5 class="text-uppercase mb-4">Subscribe to Our Newsletter</h5>
+            <form>
+              <div class="form-group">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email" />
+              </div>
+              <br />
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="text-center p-3 text-white bg-body-tertiary">
+        © 2023 Dialect
+      </div>
+        
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="../src/app.js" type="module"></script>
+</body>
+
+</html>
